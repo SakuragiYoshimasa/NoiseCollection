@@ -126,7 +126,7 @@ public class NoiseViewer : MonoBehaviour {
 		int[] indices = new int[size_x * size_y];
 		for(int i = 0; i < size_x; i++){
 			for(int j = 0; j < size_y; j++){
-				vertices[i * size_y + j] = new Vector3((float)i / size_x, (float)j / size_y, 0.0f);
+				vertices[i * size_y + j] = new Vector3((float)i / (float)size_x + 0.5f, (float)j / (float)size_y + 0.5f, 1.0f);
 				indices[i * size_y + j] = i * size_y + j;
 			}
 		}

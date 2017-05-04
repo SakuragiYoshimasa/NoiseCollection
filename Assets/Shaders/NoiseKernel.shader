@@ -15,8 +15,8 @@
     CGINCLUDE
 
     #include "UnityCG.cginc"
-	#include "Noise/SimplexNoiseGrad3D.cginc"
-    //#include "Noise/ClassicPerlinNoise.cginc"
+	#include "SimplexNoiseGrad3D.cginc"
+    //#include "ClassicNoise3D.cginc"
    
     sampler2D _PositionTex;
 	sampler2D _VelocityTex;
@@ -41,8 +41,8 @@
 
 			//float3 p = tex2D(_PositionTex, i.uv).xyz;
             //float3 p;
-            //p.xy = i.uv;     
-            //p.z = cnoise(float3(i.uv, 10.0));
+            //p.xz = i.uv - float2(0.75, 0.75);     
+            //p.y = cnoise(float3(i.uv, _Time.y));
             float3 p =snoise_grad(float3(i.uv * float2(10.0, 10.0), _Time.y));
             //TODO noise return 3d grad
 			return float4(p, 1.0); 

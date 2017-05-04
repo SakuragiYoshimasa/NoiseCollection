@@ -15,16 +15,18 @@
 
 	struct Input {
         half color;	
+		float size : PSIZE;
 	};
 
 	void vert(inout appdata_base v, out Input data)
 	{
 		UNITY_INITIALIZE_OUTPUT(Input, data);
 		float2 uv = v.vertex.xy;
-		float p = tex2Dlod(_PositionTex, float4(uv, 0, 0)).rgb;
-
-		v.vertex.xyz = p * 10.0;
+		float3 p = tex2Dlod(_PositionTex, float4(uv, 0, 0)).rgb;
+		
+ 		v.vertex.xyz = p * 5.0;
 		data.color = 1.0;
+		//data.size = 10.0;
 	}
 
 	ENDCG
@@ -34,16 +36,17 @@
 
 		CGPROGRAM
 		
-		#pragma surface surf Standard vertex:vert nolightmap addshadow
+		#pragma surface surf Lambert vertex:vert nolightmap addshadow
 		#pragma target 3.0
 
-		void surf (Input IN, inout SurfaceOutputStandard o) {
+		void surf (Input IN, inout SurfaceOutput o) {
 			
 
 			o.Albedo = float3(IN.color, IN.color, IN.color);
-			o.Metallic = _Metallic;
-			o.Smoothness = _Glossiness;
+			//o.Metallic = _Metallic;
+			//o.Smoothness = _Glossiness;
 			o.Alpha = 1.0;
+			o.Emission = half3(1.0, 1.0, 1.0);
 			
 		}
 		ENDCG
