@@ -66,8 +66,7 @@ namespace NoiseCollection {
 			_kernelMat.SetTexture("_DefaultTex", _player.texture);
 			//Update
 			Graphics.Blit(null, positionBufferDist, _kernelMat, (int)KernelPass.UpdatePosition);
-			Debug.Log((int)KernelPass.UpdatePosition);
-
+			
 			SwapBuffer();
 		}
 
